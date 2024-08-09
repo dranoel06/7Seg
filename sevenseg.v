@@ -1,6 +1,5 @@
-module sevensegone(input clk, output [6:0] display, output [3:0] digit_select);
+module sevenseg(input clk, output [6:0] display, output [3:0] digit_select);
 
-localparam LED_TIMER = 135000;
 reg [18:0] digit_change_counter = 0;
 reg [25:0] count_up_counter = 0;
 reg [1:0] led_counter = 0;
@@ -12,7 +11,7 @@ always @ (posedge clk) begin
     digit_change_counter <= digit_change_counter + 1;
     count_up_counter = count_up_counter + 1;
 
-if (digit_change_counter == LED_TIMER) begin
+if (digit_change_counter == 135000) begin
 
     digit_change_counter <= 0;
     led_counter <= led_counter + 1;
@@ -91,7 +90,7 @@ endmodule
 
 module top(input clk, output [6:0] display, output [3:0] digit_select);
 
-sevensegone disp2(
+sevenseg disp(
     .clk(clk),
     .display(display),
     .digit_select(digit_select)
