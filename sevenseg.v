@@ -1,7 +1,7 @@
 module sevenseg(input clk, output [6:0] display, output [3:0] digit_select);
 
 reg [18:0] digit_change_counter = 0;
-reg [25:0] count_up_counter = 0;
+reg [25:0] number_change_counter = 0;
 reg [1:0] led_counter = 0;
 reg [3:0] digit_extracted;
 reg [11:0] number = 0;
@@ -9,7 +9,7 @@ reg [11:0] number = 0;
 always @ (posedge clk) begin
 
     digit_change_counter <= digit_change_counter + 1;
-    count_up_counter = count_up_counter + 1;
+    number_change_counter <= number_change_counter + 1;
 
 if (digit_change_counter == 135000) begin
 
@@ -18,9 +18,9 @@ if (digit_change_counter == 135000) begin
 
 end
 
-if (count_up_counter == 2700000) begin
+if (number_change_counter == 2700000) begin
 
-        count_up_counter <= 0;
+        number_change_counter <= 0;
         number = number + 1;
         
 end
